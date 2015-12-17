@@ -1,0 +1,35 @@
+#
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "field:account.invoice.line.merger.start,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:account.invoice.line.merger.start,invoices:"
+msgid "Invoices"
+msgstr "Totes les factures"
+
+msgctxt "model:account.invoice.line.merger.start,name:"
+msgid "Invoice Line Merger Start"
+msgstr "Comença fusió de línies de factura"
+
+msgctxt "model:ir.action,name:merger"
+msgid "Merge Invoice Lines"
+msgstr "Fusiona línies de factura"
+
+msgctxt "view:account.invoice.line.merger.start:"
+msgid "Are you sure to merge lines of these invoices?"
+msgstr "Esteu segur que voleu fusionar les línies d'aquestes factures"
+
+msgctxt "view:account.invoice.line.merger.start:"
+msgid "Merge Invoice Lines"
+msgstr "Fusiona línies de factura"
+
+msgctxt "wizard_button:account.invoice.line.merger,start,end:"
+msgid "Cancel"
+msgstr "Cancel·lat"
+
+msgctxt "wizard_button:account.invoice.line.merger,start,merge:"
+msgid "Merge"
+msgstr "Fusiona"
