@@ -9,10 +9,10 @@ from trytond.wizard import Button, StateAction, StateView, Wizard
 
 
 __all__ = ['InvoiceLine', 'InvoiceLineMergerStart', 'InvoiceLineMerger']
-__metaclass__ = PoolMeta
 
 
 class InvoiceLine:
+    __metaclass__ = PoolMeta
     __name__ = 'account.invoice.line'
 
     @classmethod
