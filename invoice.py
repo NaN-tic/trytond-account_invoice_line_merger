@@ -34,6 +34,25 @@ class InvoiceLine:
                 ])
         return grouping
 
+    @classmethod
+    def _merge_lines(cls, grouped_lines):
+        quantity = 0.0
+        description = None
+        note = None
+        for line in reversed(grouped_lines):
+            quantity += line.quantity
+            if not description:
+                description = line.description
+            else:
+                description += '\n' + line.description
+            if not note:
+                note = line.note
+            elif line.note:
+                note += '\n' + line.note
+        line.quantity = quantity
+        line.description = description
+        line.note = note
+
 
 class InvoiceLineMergerStart(ModelView):
     'Invoice Line Merger Start'
@@ -75,29 +94,17 @@ class InvoiceLineMerger(Wizard):
             grouped_lines = list(grouped_lines)
             if len(grouped_lines) == 1:
                 continue
-            quantity = 0.0
-            description = None
-            note = None
-            for line in grouped_lines:
-                quantity += line.quantity
-                if not description:
-                    description = line.description
-                else:
-                    description += '\n' + line.description
-                if not note:
-                    note = line.note
-                elif line.note:
-                    note += '\n' + line.note
-            line = InvoiceLine(grouped_lines[0])
-            line.quantity = quantity
-            line.description = description
-            line.note = note
-            to_update.append(line)
+
+            InvoiceLine._merge_lines(grouped_lines)
+
+            to_update.append(grouped_lines[0])
             to_delete.extend(grouped_lines[1:])
 
         with Transaction().set_user(0, set_context=True):
-            InvoiceLine.save(to_update)
-            InvoiceLine.delete(to_delete)
+            if to_update:
+                InvoiceLine.save(to_update)
+            if to_delete:
+                InvoiceLine.delete(to_delete)
 
         data = {'res_id': [i.id for i in invoices]}
         action['views'].reverse()
