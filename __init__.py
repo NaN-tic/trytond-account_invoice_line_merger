@@ -2,14 +2,14 @@
 # The COPYRIGHT file at the top level of this repository contains the full
 # copyright notices and license terms.
 from trytond.pool import Pool
-from .invoice import *
+from . import invoice
 
 
 def register():
     Pool.register(
-        InvoiceLine,
-        InvoiceLineMergerStart,
+        invoice.InvoiceLine,
+        invoice.InvoiceLineMergerStart,
         module='account_invoice_line_merger', type_='model')
     Pool.register(
-        InvoiceLineMerger,
+        invoice.InvoiceLineMerger,
         module='account_invoice_line_merger', type_='wizard')
